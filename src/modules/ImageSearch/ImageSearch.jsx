@@ -22,6 +22,8 @@ const ImageSearch = () => {
     if (!search) {
       return;
     }
+    // якщо змінився search або page створюємо fetchImages
+    // яка відправляє запит
     const fetchImages = async () => {
       try {
         setLoading(true);
@@ -29,7 +31,7 @@ const ImageSearch = () => {
         const data = await searchImage(search, page);
         data.hits.length === 0
           ? Notify.info('Sorry, nothing found')
-          : // беремо старий items і дописуємо новий
+          : // розпилюємо prevItems щоб дописати: старі картинки і додати нові
             setItems(prevItems => [...prevItems, ...data.hits]);
         setTotalHits(data.totalHits);
       } catch (error) {
@@ -38,6 +40,7 @@ const ImageSearch = () => {
         setLoading(false);
       }
     };
+    // запустили ф-ю для запиту
     fetchImages();
   }, [search, page]);
 
