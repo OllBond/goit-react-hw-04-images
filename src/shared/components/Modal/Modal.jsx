@@ -19,7 +19,7 @@ const Modal = ({ close, children }) => {
     // якщо повертаємо ф-ю реак запам'ятовує і викликає під час розмонтування
     // прибираємо, коли вона зникає
     return () => document.removeEventListener('keydown', closeModal);
-  }, []);
+  });
 
   return createPortal(
     // перший аргумент - що відмалювати, другим - куди
